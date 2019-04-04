@@ -1,0 +1,43 @@
+
+
+g++ -MM -I.  utilities.cc     >  utilities.d
+g++ -MM -I.  stringtab.cc     >  stringtab.d
+g++ -MM -I.  dumptype.cc      >  dumptype.d
+g++ -MM -I.  tree.cc          >  tree.d
+g++ -MM -I.  cool-tree.cc     >  cool-tree.d
+g++ -MM -I.  ast-lex.cc       >  ast-lex.d
+g++ -MM -I.  ast-parse.cc     >  ast-parse.d
+g++ -MM -I.  handle_flags.cc  >  handle_flags.d
+g++ -MM -I.  cgen.cc          >  cgen.d
+g++ -MM -I.  cgen_supp.cc     >  cgen_supp.d
+g++ -MM -I.  cgen-phase.cc    >  cgen-phase.d
+
+      
+
+g++ -g -Wall -Wno-write-strings -I. -c utilities.cc
+g++ -g -Wall -Wno-write-strings -I. -c stringtab.cc
+g++ -g -Wall -Wno-write-strings -I. -c dumptype.cc
+g++ -g -Wall -Wno-write-strings -I. -c tree.cc
+g++ -g -Wall -Wno-write-strings -I. -c cool-tree.cc
+g++ -g -Wall -Wno-write-strings -I. -c ast-lex.cc
+g++ -g -Wall -Wno-write-strings -I. -c ast-parse.cc
+g++ -g -Wall -Wno-write-strings -I. -c handle_flags.cc
+g++ -g -Wall -Wno-write-strings -I. -c cgen.cc
+g++ -g -Wall -Wno-write-strings -I. -c cgen_supp.cc
+g++ -g -Wall -Wno-write-strings -I. -c cgen-phase.cc
+
+
+
+g++ -g -Wall -Wno-write-strings -Wno-unused-function -Wno-unused-variable -I. -c utilities.cc stringtab.cc dumptype.cc tree.cc cool-tree.cc ast-lex.cc ast-parse.cc handle_flags.cc cgen.cc cgen_supp.cc cgen-phase.cc
+
+
+g++ -g -Wall -Wno-write-strings -I. utilities.o stringtab.o dumptype.o tree.o cool-tree.o ast-lex.o ast-parse.o handle_flags.o cgen.o cgen_supp.o cgen-phase.o -lfl -o cgen
+
+g++ -g -Wall -Wno-write-strings -I. utilities.o stringtab.o dumptype.o tree.o cool-tree.o ast-lex.o ast-parse.o handle_flags.o cgen.o cgen_supp.o cgen-phase.o -L/lib -lfl -o cgen
+
+run:
+./lexer xxx.cl | ./parser xxx.cl | ./semant xxx.cl | ./cgen xxx.cl
+
+run.sh:
+#!/bin/sh
+./lexer $* | ./parser $* | ./semant $* |./cgen $*

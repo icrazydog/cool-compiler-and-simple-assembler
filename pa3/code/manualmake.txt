@@ -1,0 +1,38 @@
+
+g++ -MM -I. handle_flags.cc   > handle_flags.d
+g++ -MM -I. utilities.cc      > utilities.d
+g++ -MM -I. semant.cc         > semant.d
+g++ -MM -I. ast-lex.cc        > ast-lex.d
+g++ -MM -I. ast-parse.cc      > ast-parse.d
+g++ -MM -I. tree.cc           > tree.d
+g++ -MM -I. cool-tree.cc      > cool-tree.d
+g++ -MM -I. dumptype.cc       > dumptype.d
+g++ -MM -I. semant-phase.cc   > semant-phase.d
+g++ -MM -I. stringtab.cc      > stringtab.d
+
+
+g++ -g -Wall -Wno-write-strings -I. -c handle_flags.cc
+g++ -g -Wall -Wno-write-strings -I. -c utilities.cc   
+g++ -g -Wall -Wno-write-strings -I. -c ast-lex.cc     
+g++ -g -Wall -Wno-write-strings -I. -c ast-parse.cc   
+g++ -g -Wall -Wno-write-strings -I. -c tree.cc
+g++ -g -Wall -Wno-write-strings -I. -c cool-tree.cc   
+g++ -g -Wall -Wno-write-strings -I. -c dumptype.cc    
+g++ -g -Wall -Wno-write-strings -I. -c semant-phase.cc
+g++ -g -Wall -Wno-write-strings -I. -c stringtab.cc  
+g++ -g -Wall -Wno-write-strings -I. -c semant.cc  
+
+
+g++ -g -Wall -Wno-write-strings -I. -c handle_flags.cc utilities.cc semant.cc ast-lex.cc ast-parse.cc tree.cc cool-tree.cc dumptype.cc stringtab.cc semant-phase.cc
+
+
+g++ -g -Wall -Wno-write-strings -I. handle_flags.o utilities.o semant.o ast-lex.o ast-parse.o tree.o cool-tree.o dumptype.o stringtab.o semant-phase.o -lfl -o semant
+
+g++ -g -Wall -Wno-write-strings -I. handle_flags.o utilities.o semant.o ast-lex.o ast-parse.o tree.o cool-tree.o dumptype.o stringtab.o semant-phase.o -L/lib -lfl -o semant
+
+run:
+./lexer xxx.cl | ./parser xxx.cl | ./semant xxx.cl
+
+run.sh:
+#!/bin/sh
+./lexer $* | ./parser $* | ./semant $*

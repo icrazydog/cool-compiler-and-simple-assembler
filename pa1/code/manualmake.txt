@@ -1,0 +1,20 @@
+flex -d -ocool-lex.cc cool.flex
+
+g++ -MM -I. -Icool-lex.cc > cool-lex.d
+g++ -MM -I. handle_flags.cc  > handle_flags.d
+g++ -MM -I. stringtab.cc  > stringtab.d
+g++ -MM -I. utilities.cc  > utilities.d
+g++ -MM -I. lextest.cc  > lextest.d
+
+g++ -g -Wall -Wno-write-strings -I. -c cool-lex.cc
+g++ -g -Wall -Wno-write-strings -I. -c handle_flags.cc
+g++ -g -Wall -Wno-write-strings -I. -c stringtab.cc
+g++ -g -Wall -Wno-write-strings -I. -c utilities.cc
+g++ -g -Wall -Wno-write-strings -I. -c lextest.cc
+
+g++ -g -Wall -Wno-write-strings -I. lextest.o utilities.o stringtab.o handle_flags.o cool-lex.o -lfl -o lexer
+
+g++ -g -Wall -Wno-write-strings -I. lextest.o utilities.o stringtab.o handle_flags.o cool-lex.o -L/lib -lfl -o lexer
+
+run:
+./lexer xxx.cl

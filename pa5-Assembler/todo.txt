@@ -1,0 +1,1 @@
+add addiu li sub move beq b jalr sw lw la neg addi addu div mul sll beqz bne ble blt bgt

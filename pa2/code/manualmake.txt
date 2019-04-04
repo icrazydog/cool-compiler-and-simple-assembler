@@ -1,0 +1,36 @@
+bison -d -v -y -b cool --debug -p cool_yy cool.y
+mv -f cool.tab.c cool-parse.cc
+
+g++ -MM -I. parser-phase.cc   > parser-phase.d
+g++ -MM -I. utilities.cc      > utilities.d
+g++ -MM -I. stringtab.cc      > stringtab.d
+g++ -MM -I. dumptype.cc       > dumptype.d
+g++ -MM -I. tree.cc           > tree.d
+g++ -MM -I. cool-tree.cc      > cool-tree.d
+g++ -MM -I. tokens-lex.cc     > tokens-lex.d
+g++ -MM -I. handle_flags.cc   > handle_flags.d
+g++ -MM -I. cool-parse.cc     > cool-parse.d
+
+g++ -g -Wall -Wno-write-strings -I. -c parser-phase.cc
+g++ -g -Wall -Wno-write-strings -I. -c utilities.cc
+g++ -g -Wall -Wno-write-strings -I. -c stringtab.cc
+g++ -g -Wall -Wno-write-strings -I. -c dumptype.cc
+g++ -g -Wall -Wno-write-strings -I. -c tree.cc
+g++ -g -Wall -Wno-write-strings -I. -c cool-tree.cc
+g++ -g -Wall -Wno-write-strings -I. -c tokens-lex.cc
+g++ -g -Wall -Wno-write-strings -I. -c handle_flags.cc
+g++ -g -Wall -Wno-write-strings -I. -c cool-parse.cc
+
+g++ -g -Wall -Wno-write-strings -I. -c parser-phase.cc utilities.cc stringtab.cc dumptype.cc tree.cc cool-tree.cc tokens-lex.cc  handle_flags.cc cool-parse.cc
+
+
+g++ -g -Wall -Wno-write-strings -I. parser-phase.o utilities.o stringtab.o dumptype.o tree.o cool-tree.o tokens-lex.o  handle_flags.o cool-parse.o -lfl -o parser
+
+g++ -g -Wall -Wno-write-strings -I. parser-phase.o utilities.o stringtab.o dumptype.o tree.o cool-tree.o tokens-lex.o  handle_flags.o cool-parse.o -L/lib -lfl -o parser
+
+run:
+./lexer xxx.cl | ./parser xxx.cl
+
+run.sh:
+#!/bin/sh
+./lexer $* | ./parser $*

@@ -1,0 +1,5 @@
+lexical analysis		tokens			lexer
+syntactic analysis(parsing)	grammar			parse
+semantic analysis		typing rules		semant(type-checker)
+optimization			evaluation rules
+code generation			evaluation rules
